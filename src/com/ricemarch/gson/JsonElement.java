@@ -10,6 +10,11 @@ package com.ricemarch.gson;
  */
 
 public abstract class JsonElement {
+    /**
+     * Returns a deep copy of this element. Immutable elements like primitives
+     * and nulls are not copied.
+     */
+    public abstract JsonElement deepCopy();
 
     public boolean isJsonArray() {
         return this instanceof JsonArray;

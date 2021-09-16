@@ -42,4 +42,9 @@ public class JsonNull extends JsonElement {
         // return this == other || other instanceof JsonNull;
         return other instanceof JsonNull;
     }
+
+    @Override
+    public JsonElement deepCopy() {
+        return INSTANCE;
+    }
 }
