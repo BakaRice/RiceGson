@@ -33,6 +33,21 @@ public class JsonArray extends JsonElement implements Iterable<JsonElement> {
     }
 
     /**
+     * creates a deep copy of this element and all its children.
+     */
+    @Override
+    public JsonElement deepCopy() {
+        if (!elements.isEmpty()) {
+            JsonArray result = new JsonArray(elements.size());
+            for (JsonElement element : elements) {
+                result.add(element.deepCopy());
+            }
+            return result;
+        }
+        return new JsonArray();
+    }
+
+    /**
      * Add the specified boolean to self
      *
      * @param bool the boolean that needs to be added to the array.
@@ -41,9 +56,35 @@ public class JsonArray extends JsonElement implements Iterable<JsonElement> {
         elements.add(bool == null ? JsonNull.INSTANCE : new JsonPrimitive(bool));
     }
 
+
+    public void add(Character character) {
+        elements.add(character == null ? JsonNull.INSTANCE : new JsonPrimitive(character));
+    }
+
+    public void add(Number number) {
+        elements.add(number == null ? JsonNull.INSTANCE : new JsonPrimitive(number));
+    }
+
+    public void add(String string) {
+        elements.add(string == null ? JsonNull.INSTANCE : new JsonPrimitive(string));
+    }
+
+    public void add(JsonElement element) {
+        elements.add(element == null ? JsonNull.INSTANCE : element);
+    }
+
+    /**
+     * Add all the elements of the specified array to self.
+     *
+     * @param array the array whose elements need to be added to the array.
+     */
+    public void addAll(JsonArray array) {
+        elements.addAll(array.elements);
+    }
+
     @Override
     public Iterator<JsonElement> iterator() {
-        return null;
+        return elements.iterator();
     }
 
     @Override
